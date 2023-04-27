@@ -1,8 +1,8 @@
 const express = require("express");
-const ctrl = require("../../controllers/contacts")
-const {catchWrapper} = require("../../utils")
-const {validation} = require("../../middlewares")
-const schema = require("../../schemas")
+const ctrl = require("../../controllers/contacts");
+const { catchWrapper } = require("../../utils");
+const { validation } = require("../../middlewares");
+const schema = require("../../schemas");
 const router = express.Router();
 
 router.get("/", catchWrapper(ctrl.listContacts));
