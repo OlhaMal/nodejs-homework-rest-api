@@ -24,10 +24,3 @@ const contactShema = new Schema({
 });
 
 module.exports = contactShema;
-
-// validate: {
-//   validator: function (v) {
-//     return valEm.test(v);
-//   },
-//   message: "Please enter a valid email",
-// },
