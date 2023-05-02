@@ -20,6 +20,10 @@ const userSchema = new Schema(
       enum: subEnum,
       default: "starter",
     },
+    avatarUrl: {
+      type: String,
+      required: true,
+    },
     token: {
       type: String,
       default: "",
