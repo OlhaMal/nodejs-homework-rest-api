@@ -1,6 +1,10 @@
 const User = require("../../models/users");
 const bcrypt = require("bcrypt");
-const { requestError } = require("../../utils");
+const { requestError, sendEmail } = require("../../utils");
+require("dotenv").config();
+const { nanoid } = require("nanoid");
+const gravatar = require("gravatar");
+const { BASE_URL } = process.env;
 const gravatar = require("gravatar");
 
 const register = async (req, res) => {
@@ -11,14 +15,26 @@ const register = async (req, res) => {
     requestError(409, "Email is already used");
   }
   const passwordHashed = await bcrypt.hash(password, 10);
-  const result = await User.create({
+  const avatarURL = gravatar.url(email);
+  const verificationCode = nanoid();
+  const newUser = await User.create({
     ...req.body,
     password: passwordHashed,
-    avatarUrl,
+    avatarURL,
+    verificationCode,
   });
+
+  const verifyEmail = {
+    to: email,
+    subject: "Verify email",
+    html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationCode}">Click to verify your email</a>`,
+  };
+
+  await sendEmail(verifyEmail);
+
   res.status(201).json({
-    email: result.email,
-    subscription: result.subscription,
+    email: newUser.email,
+    subscription: newUser.subscription,
   });
 };
 
