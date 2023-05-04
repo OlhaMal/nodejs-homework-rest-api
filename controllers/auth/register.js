@@ -4,12 +4,13 @@ const { requestError, sendEmail } = require("../../utils");
 require("dotenv").config();
 const { nanoid } = require("nanoid");
 const gravatar = require("gravatar");
-
 const { BASE_URL } = process.env;
+const gravatar = require("gravatar");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+  const avatarUrl = gravatar.url(email);
   if (user) {
     requestError(409, "Email is already used");
   }
@@ -30,7 +31,7 @@ const register = async (req, res) => {
   };
 
   await sendEmail(verifyEmail);
-  
+
   res.status(201).json({
     email: newUser.email,
     subscription: newUser.subscription,

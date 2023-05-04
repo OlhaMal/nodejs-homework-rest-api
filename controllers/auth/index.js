@@ -5,6 +5,8 @@ const register = require("./register");
 const subscription = require("./subscr");
 const verifyEmail = require("./verifyEmail");
 const resendEmail = require("./resendEmail");
+const updateAvatar = require("./updateAvatar");
+
 
 module.exports = {
   getCurrent,
@@ -14,4 +16,5 @@ module.exports = {
   subscription,
   verifyEmail,
   resendEmail,
+  updateAvatar,
 };
