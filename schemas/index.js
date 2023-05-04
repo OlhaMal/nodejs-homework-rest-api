@@ -6,6 +6,7 @@ const userSchema = require("./auth/RegisterUserSchema");
 const subscrSchema = require("./auth/subscrSchema");
 const registerSchema = require("./auth/registerSchema");
 const loginSchema = require("./auth/loginSchema");
+const emailVerify = require("./auth/emailVerify");
 
 module.exports = {
   addShema,
@@ -16,4 +17,5 @@ module.exports = {
   subscrSchema,
   registerSchema,
   loginSchema,
+  emailVerify,
 };

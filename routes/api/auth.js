@@ -20,8 +20,17 @@ router.get("/logout", authentication, catchWrapper(ctrl.logout));
 
 router.patch(
   "/",
+  authentication,
   validation(schema.subscrSchema),
   catchWrapper(ctrl.subscription)
 );
+
+router.post(
+  "/verify",
+  validation(schema.emailVerify),
+  catchWrapper(ctrl.resendEmail)
+);
+
+router.get("/verify/:verificationToken", catchWrapper(ctrl.verifyEmail));
 
 module.exports = router;
